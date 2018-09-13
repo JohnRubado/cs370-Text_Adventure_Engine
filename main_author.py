@@ -7,5 +7,5 @@ myWorld.newArea("quarry");
 myWorld.newArea("trail");
 
 myWorld.newTransition("portal","forest", "quarry", "North", ["teleport"], True);
-
+myWorld.newTransition("Ladder", "trail","quarry","West", ["climb"], True);
 myWorld.printWorld();

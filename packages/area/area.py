@@ -1,15 +1,28 @@
 from packages.item import item;
+from packages.direction.direction import direction;
 from enum import Enum;
 
 class Area:
 
-    
     transitions = None;
     items = [];
+    directions = None;
+    north = None;
+    east = None;
+    south = None;
+    west = None;
 
     def __init__(self,name):
         self.name = name;
-        self.transitions = [None,None,None,None];
+        self.north = direction("north");
+        self.east = direction("east");
+        self.south = direction("south");
+        self.west = direction("west");
+        self.directions = [None,None,None,None];
+        self.directions[0] = self.north;
+        self.directions[1] = self.east;
+        self.directions[2] = self.south;
+        self.directions[3] = self.west;
 
     def newItem(self, item):
         print "TBD";
@@ -17,22 +30,11 @@ class Area:
     def newTransition(self, transition):
         cardinalPosition = transition.cardinalPosition;
 
-        if cardinalPosition == "N":
-            self.transitions[transition_position.NORTH.value] = transition;
-        elif cardinalPosition == "E":
-            self.transitions[transition_position.EAST.value] = transition;
-        elif cardinalPosition == "S":
-            self.transitions[transition_position.SOUTH.value] = transition;
+        if cardinalPosition == "north":
+            self.north.newTransition(transition);
+        elif cardinalPosition == "east":
+            self.east.newTransition(transition);
+        elif cardinalPosition == "south":
+            self.south.newTransition(transition);
         else:
-            self.transitions[transition_position.NORTH.value] = transition;
-
-        #print self.name + " " +self.transitions[0].name;
-
-
-
-
-class transition_position(Enum):
-    NORTH = 0;
-    EAST = 1;
-    SOUTH = 2
-    WEST = 3;
+            self.west.newTransition(transition);

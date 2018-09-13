@@ -18,13 +18,14 @@ class world:
         self.areas.append(newArea);
 
     def printWorld(self):
+
         print "World: " + self.name;
         print "\tAreas:";
         for area in self.areas:
             print "\t" + area.name + " containing transitions: "
-            for transition in area.transitions:
-                if transition != None:
-                    print "\t\t" + transition.name + " in the " + transition.cardinalPosition;
+            for direction in area.directions:
+                if direction.transition != None:
+                    print "\t\t" + direction.transition.name + " in the " + direction.direction;
 
     def newTransition(self, name, area, destination, cardinalPosition, possibleActions, isTwoWay):
 

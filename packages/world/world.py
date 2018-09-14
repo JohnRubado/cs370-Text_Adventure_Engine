@@ -2,6 +2,8 @@ from packages.area.area import Area
 from packages.transition.transition import transition;
 from packages.player.player import player;
 
+#TODO: Add functionality for looking in  direction
+
 class world:
     NORTH = 0;
     EAST = 1;
@@ -13,6 +15,39 @@ class world:
         self.name = name;
         self.playerName = playerName;
         self.areas = [];
+
+
+
+    def look(self, target = ""):
+        validCardinalDirection = self.validCardinalDirection(target);
+        if validCardinalDirection == True:
+            #just a direction
+            print "";
+        elif target == "":
+            #observe the area
+            playerArea = self.player.currentArea;#string
+            if self.areaExists(playerArea):
+                currAreaIndex = self.getArea(playerArea);
+                areaObj = self.areas[currAreaIndex]#obj
+                print "It appears I am in a " + areaObj.name + " " + areaObj.description;
+                for direction in areaObj.directions:
+                    if direction.transition != None:
+                        print "There is a " + direction.transition.name + " in the " + direction.direction;
+
+
+
+    #calling of this function may throw an exception if
+    #the area does not exist.
+    def getArea(self, areaName):
+
+        if self.areaExists(areaName):
+            for possibleArea in self.areas:
+                if possibleArea.name == areaName:
+                    return self.areas.index(possibleArea);
+        else:
+            raise Exception("Area named " + areaName + "does not exist");
+
+
 
 
 
@@ -98,11 +133,11 @@ class world:
         print "";
 
 
-    def newArea(self,name):
+    def newArea(self,name, description):
         for area in self.areas:
             if area.name == name:
                 raise Exception("Area named " + name + " already exists");
-        newArea = Area(name);
+        newArea = Area(name,description);
         self.areas.append(newArea);
 
         #if this is the first area made then the players position defaults to it

@@ -1,6 +1,6 @@
 from packages.item import item;
 from packages.direction.direction import direction;
-from enum import Enum;
+
 
 class Area:
 

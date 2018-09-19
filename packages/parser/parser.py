@@ -6,8 +6,10 @@ class parser:
         self.world = world
 
     def start(self):
+        print self.world.name;
         while(True):
             userInput = raw_input()
+            print "";
             userInput = userInput.lower().split()
             moveKeywords = ["move","go"]
             lookKeywords = ["look", "show"]
@@ -17,9 +19,11 @@ class parser:
                     userInput.remove(word)
             if userInput[0] in moveKeywords:
                 argument = ' '.join(userInput[1:])
-                if argument is '':
-                    self.world.movePlayer()
-                else:
-                    self.world.movePlayer(argument)
+                self.world.movePlayer(argument)
+
             elif userInput[0] in lookKeywords:
                 argument = ' '.join(userInput[1:])
+                if argument is '':
+                    self.world.look()
+                else:
+                    self.world.look(argument)

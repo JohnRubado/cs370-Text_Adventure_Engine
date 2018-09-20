@@ -14,6 +14,8 @@ class parser:
             moveKeywords = ["move","go"]
             lookKeywords = ["look", "show"]
             noiseWords = ["at", "am", "here", "there"]
+            if len(userInput) is 0:
+                continue
             for word in noiseWords:
                 if word in userInput:
                     userInput.remove(word)
@@ -28,4 +30,4 @@ class parser:
                 else:
                     self.world.look(argument)
             else:
-                print "I don't know" + userInput[0]
+                print "I don't know " + userInput[0]

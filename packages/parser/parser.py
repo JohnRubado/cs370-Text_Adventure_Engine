@@ -27,3 +27,5 @@ class parser:
                     self.world.look()
                 else:
                     self.world.look(argument)
+            else:
+                print "I don't know" + userInput[0]

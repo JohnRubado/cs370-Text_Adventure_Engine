@@ -4,9 +4,10 @@ class item:
 
     possibleActions = [];
 
-    def __init__(self, name):
-        this.name = name;
-        this.possibleActions = [];
+    def __init__(self, name, description):
+        self.name = name;
+        self.description = description
+        self.possibleActions = [];
 
     def addAction(self, action):
-        this.possibleActions.append(action);
+        self.possibleActions.append(action);

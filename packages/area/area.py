@@ -5,7 +5,7 @@ from packages.direction.direction import direction;
 class Area:
 
     transitions = None;
-    items = [];
+
     directions = None;
     north = None;
     east = None;
@@ -14,6 +14,7 @@ class Area:
 
     def __init__(self,name, description = "A vast land of wonders, maybe I should take a look around?"):
         self.name = name;
+        self.items = [];
         self.north = direction("north");
         self.east = direction("east");
         self.south = direction("south");
@@ -26,7 +27,8 @@ class Area:
         self.directions[3] = self.west;
 
     def newItem(self, item):
-        print "This will print a new item";
+        self.items.append(item)
+
 
     def newTransition(self, transition):
         cardinalPosition = transition.cardinalPosition;

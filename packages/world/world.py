@@ -1,6 +1,7 @@
 from packages.area.area import Area
 from packages.transition.transition import transition;
 from packages.player.player import player;
+from packages.item.item import item;
 
 #TODO: Add functionality for looking in  direction
 
@@ -146,6 +147,9 @@ class world:
         areaObj = self.areas[currAreaIndex]#obj
         if target == "":
             print "It appears I am in a " + areaObj.name + ". " + areaObj.description;
+            print "I see "
+            for item in areaObj.items:
+                print item.name + " "+ item.description
             for direction in areaObj.directions:
                 if direction.transition != None:
                     print "I see a " + direction.transition.name + " in the " + direction.direction;
@@ -186,6 +190,15 @@ class world:
         return areaFound;
     def setAreaDescriptions(self,areaName,descriptions, cardinalDirections):
         print "";
+
+    def newItem(self,name,description,areaName):
+        targetArea=self.areas[self.getArea(areaName)]
+        newitem=item(name,description)
+        targetArea.newItem(newitem)
+
+
+
+
     def printWorld(self):
 
         print "World: " + self.name;

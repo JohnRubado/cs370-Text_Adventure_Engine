@@ -11,5 +11,7 @@ myWorld.newTransition("portal","forest", "quarry", "south", ["teleport"], True);
 myWorld.newTransition("portal","quarry", "trail", "west", ["teleport"], True);
 myWorld.newTransition("ladder","trail", "river", "west", ["climb"], False);
 
+myWorld.newItem(" A Key"," Its a fucking key","river");
+
 parser = parser(myWorld);
 parser.start();

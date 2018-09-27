@@ -26,7 +26,7 @@ class Area:
         self.directions[3] = self.west;
 
     def newItem(self, item):
-        print "TBD";
+        print "This will print a new item";
 
     def newTransition(self, transition):
         cardinalPosition = transition.cardinalPosition;

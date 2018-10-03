@@ -33,6 +33,57 @@ class world:
         #if this is the first area made then the players position defaults to it
         if len(self.areas) == 1:
             self.setStart(self.areas[0].name);
+    def newTransition(self, name, area, destination, cardinalPosition, possibleActions, isTwoWay):
+
+        areaFound = False;
+        destinationFound = False;
+        validCardinalPosition = False;
+        targetArea = None;
+        targetDestination = None;
+
+        #ERROR CHECKING UP FRONT
+        #checking for existence of target area
+        for possibleArea in self.areas:
+            if possibleArea.name == area:
+                areaFound = True;
+                targetArea = possibleArea;
+
+        if areaFound == False:
+            raise Exception("Area " + area + " does not exist");
+
+        #checking for existence of target destination
+        for possibleDest in self.areas:
+            if possibleDest.name == destination:
+                destinationFound = True;
+                targetDestination = possibleDest.name;
+
+        if destinationFound == False:
+            raise Exception("Destination " + destination + " does not exist");
+        cardinalPosition = cardinalPosition.lower();
+
+        #checking if cardinalPosition is valid
+        if  self.validCardinalDirection(cardinalPosition) == False:
+            raise Exception("Cardinal position " + cardinalPosition + " is an invalid cardinal position ");
+
+            #this logic here is recursive. If the transition is one way then we simply create the transition and place it in the area.
+            #if it is two way, we
+
+        if isTwoWay == False:
+            newTransition = transition(name, targetArea, targetDestination, cardinalPosition, possibleActions);
+            targetArea.newTransition(newTransition);
+        if isTwoWay == True:
+            newTransition = transition(name, targetArea, targetDestination, cardinalPosition, possibleActions);
+            targetArea.newTransition(newTransition);
+            #Swap destination with area, invert cardinalPosition, invert isTwoWay because we are putting the transition in the other room
+
+            if cardinalPosition == "east":
+                self.newTransition(name, destination, area, "west", possibleActions, False);
+            elif cardinalPosition == "west":
+                self.newTransition(name, destination, area, "east",possibleActions, False);
+            elif cardinalPosition == "north":
+                self.newTransition(name, destination, area, "south", possibleActions, False);
+            elif cardinalPosition == "south":
+                self.newTransition(name, destination, area, "north", possibleActions, False);
 
 
     #PARSER METHODS
@@ -137,7 +188,6 @@ class world:
             if possibleArea.name == area:
                 areaFound = True;
         return areaFound;
-
     def setAreaDescriptions(self,areaName,descriptions, cardinalDirections):
         print "";
 
